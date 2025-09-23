@@ -1,9 +1,9 @@
-import AuthPage from "./pages/AuthPage.jsx";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <AuthPage />
+      <Outlet />
     </>
   );
 }

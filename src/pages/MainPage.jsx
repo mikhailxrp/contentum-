@@ -1,6 +1,10 @@
+import { Link } from "react-router-dom";
+import LandingHeader from "../components/LandingHeader.jsx";
+
 function MainPage() {
   return (
-    <div>
+    <div className="landing-page">
+      <LandingHeader />
       {/* Hero Section */}
       <section
         className="section"
@@ -29,9 +33,9 @@ function MainPage() {
                   flexWrap: "wrap",
                 }}
               >
-                <a href="#" className="btn btn-primary">
+                <Link to={"/auth"} className="btn btn-primary">
                   Начать бесплатно
-                </a>
+                </Link>
                 <a href="#" className="btn btn-outline">
                   Посмотреть демо (2 мин)
                 </a>
@@ -474,13 +478,13 @@ function MainPage() {
             Присоединяйтесь к тысячам предпринимателей, которые уже экономят
             время на создании контента
           </p>
-          <a
-            href="#"
+          <Link
+            to={"/auth"}
             className="btn btn-primary"
             style={{ fontSize: "1.3rem", padding: "1.2rem 3rem" }}
           >
             Создать первый контент-план
-          </a>
+          </Link>
         </div>
       </section>
 
