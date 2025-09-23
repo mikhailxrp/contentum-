@@ -1,7 +1,36 @@
 import { useState } from "react";
+import { useLoginMutation } from "../store/api/baseApi";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../store/features/authSlice";
+import { useNavigate, useLocation } from "react-router-dom";
+import Loader from "./Loader.jsx";
 
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [login, { isLoading }] = useLoginMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    if (isLogin) {
+      try {
+        const result = await login({ email, password });
+        if (result.data) {
+          dispatch(setCredentials(result.data));
+          navigate(from, { replace: true });
+          setEmail("");
+          setPassword("");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   const handleToggle = () => {
     setIsLogin(!isLogin);
@@ -32,7 +61,7 @@ function AuthForm() {
           </button>
         </div>
 
-        <form className="auth-form">
+        <form className="auth-form" onSubmit={handleFormSubmit}>
           <div className="form-group">
             <label htmlFor="email" className="form-label">
               Email
@@ -42,6 +71,8 @@ function AuthForm() {
               id="email"
               className="form-input"
               placeholder="your@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -54,11 +85,23 @@ function AuthForm() {
               id="password"
               className="form-input"
               placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
-          <button type="submit" className="auth-submit-btn">
-            {isLogin ? "Войти" : "Зарегистрироваться"}
+          <button
+            type="submit"
+            className="auth-submit-btn"
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <Loader size="small" variant="dots" />
+            ) : isLogin ? (
+              "Войти"
+            ) : (
+              "Зарегистрироваться"
+            )}
           </button>
 
           {isLogin && (

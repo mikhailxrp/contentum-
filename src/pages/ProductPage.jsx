@@ -1,38 +1,32 @@
 import { useState } from "react";
-import Sidebar from "../components/Sidebar.jsx";
+import ProductForm from "../components/ProductForm.jsx";
 import Header from "../components/Header.jsx";
 import MainContent from "../components/MainContent.jsx";
-import ProductForm from "../components/ProductForm.jsx";
+import ContentPlan from "../components/ContentPlan.jsx";
+import Articles from "../components/Articles.jsx";
+import ArticlesIntegration from "../components/ArticlesIntegration.jsx";
 
 function ProductPage() {
-  const [activeSidebarItem, setActiveSidebarItem] = useState("create-product");
   const [activeTab, setActiveTab] = useState("product");
-
-  const handleSidebarItemClick = (itemId) => {
-    setActiveSidebarItem(itemId);
-  };
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
   };
 
   return (
-    <div className="app-layout">
-      <Sidebar
-        activeItem={activeSidebarItem}
-        onItemClick={handleSidebarItemClick}
+    <>
+      <Header
+        title="Название продукта"
+        activeTab={activeTab}
+        onTabClick={handleTabClick}
       />
-      <div className="main-layout">
-        <Header
-          title="Название продукта"
-          activeTab={activeTab}
-          onTabClick={handleTabClick}
-        />
-        <MainContent>
-          <ProductForm />
-        </MainContent>
-      </div>
-    </div>
+      <MainContent>
+        {activeTab === "product" && <ProductForm />}
+        {activeTab === "content-plan" && <ContentPlan />}
+        {activeTab === "articles" && <Articles />}
+        {activeTab === "integrations" && <ArticlesIntegration />}
+      </MainContent>
+    </>
   );
 }
 

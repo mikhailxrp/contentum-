@@ -1,9 +1,13 @@
-import MenuItem from "./MenuItem.jsx";
+import MenuItemSidebar from "./MenuItemSidebar.jsx";
 
-function Sidebar({ activeItem, onItemClick }) {
+function Sidebar({ activeItem, onItemClick, to }) {
   const menuItems = [
     { id: "create-product", icon: "📝", label: "Создать продукт" },
-    { id: "video-content", icon: "🎬", label: "Видео контент" },
+    {
+      id: "video-content",
+      icon: "🎬",
+      label: "Видео контент",
+    },
     { id: "create-image", icon: "🎨", label: "Создать изображение" },
     { id: "ai-chat", icon: "💬", label: "AI-Чат" },
   ];
@@ -19,8 +23,9 @@ function Sidebar({ activeItem, onItemClick }) {
 
       <nav className="sidebar-nav">
         {menuItems.map((item) => (
-          <MenuItem
+          <MenuItemSidebar
             key={item.id}
+            to={item.id}
             icon={item.icon}
             label={item.label}
             isActive={activeItem === item.id}
