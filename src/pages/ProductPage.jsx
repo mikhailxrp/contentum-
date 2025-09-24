@@ -8,6 +8,12 @@ import ArticlesIntegration from "../components/ArticlesIntegration.jsx";
 
 function ProductPage() {
   const [activeTab, setActiveTab] = useState("product");
+  const tabs = [
+    { id: "product", icon: "📋", label: "Продукт" },
+    { id: "content-plan", icon: "📊", label: "Контент план" },
+    { id: "articles", icon: "📝", label: "Статьи" },
+    { id: "integrations", icon: "🔗", label: "Интеграции" },
+  ];
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -19,6 +25,7 @@ function ProductPage() {
         title="Название продукта"
         activeTab={activeTab}
         onTabClick={handleTabClick}
+        tabs={tabs}
       />
       <MainContent>
         {activeTab === "product" && <ProductForm />}

@@ -1,13 +1,6 @@
 import MenuItem from "./MenuItem.jsx";
 
-function Header({ title, activeTab, onTabClick }) {
-  const tabs = [
-    { id: "product", icon: "📋", label: "Продукт" },
-    { id: "content-plan", icon: "📊", label: "Контент план" },
-    { id: "articles", icon: "📝", label: "Статьи" },
-    { id: "integrations", icon: "🔗", label: "Интеграции" },
-  ];
-
+function Header({ title, activeTab, onTabClick, tabs = [] }) {
   return (
     <header className="header">
       <div className="header-content">

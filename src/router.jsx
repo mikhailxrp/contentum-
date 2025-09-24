@@ -12,6 +12,8 @@ import ProductPage from "./pages/ProductPage.jsx";
 import MainPage from "./pages/MainPage.jsx";
 import VideoContentPage from "./pages/VideoContentPage.jsx";
 import PrivateRoute from "./store/features/PrivateRoute.jsx";
+import ImagePage from "./pages/ImagePage.jsx";
+import ChatPage from "./pages/ChatPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +28,8 @@ const router = createBrowserRouter(
           <Route index element={<Navigate to="create-product" replace />} />
           <Route path="create-product" element={<ProductPage />} />
           <Route path="video-content" element={<VideoContentPage />} />
+          <Route path="create-image" element={<ImagePage />} />
+          <Route path="ai-chat" element={<ChatPage />} />
         </Route>
       </Route>
     </>
